@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "rpc-client": "^4.0.5",
+    "rpc-client-js": "^0.0.3",
     "vue": "^2.5.16",
     "vue-codemirror-lite": "^1.0.4",
     "vue-electron": "^1.0.6",

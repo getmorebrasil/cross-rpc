@@ -8,7 +8,7 @@
 <script>
 import { codemirror } from "vue-codemirror-lite/index";
 import { setTimeout } from "timers";
-import { Handler, connectionClient } from "rpc-client/client";
+import { Handler, connectionClient } from "rpc-client-js/client";
 import { resolve } from "path";
 require("codemirror/mode/javascript/javascript");
 export default {
@@ -88,9 +88,7 @@ export default {
           );
           Handler.foo = () => {};
           let [, target, params] = this.code.match(/([^\(]+)(.+)/);
-          console.log(target, params);
-          params = params.match(/[^'", \(\)]+/g);
-          console.log(params);
+          params = JSON.parse(params.match(/[^\(]+[^\)]/g));
           const resp = await Handler[target](params, {
             return: "String"
           }).catch(err => {
