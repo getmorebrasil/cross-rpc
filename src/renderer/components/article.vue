@@ -87,12 +87,10 @@ export default {
             val.queue
           );
           Handler.foo = () => {};
-          const funcReq = this.code.match(/(\D+\()(\{.+}|\))/);
-          console.log(funcReq);
-          const target = funcReq[1].replace("(", "").trim();
-          const params =
-            funcReq[2].indexOf("{") > -1 ? JSON.parse(funcReq[2]) : {};
-
+          let [, target, params] = this.code.match(/([^\(]+)(.+)/);
+          console.log(target, params);
+          params = params.match(/[^'", \(\)]+/g);
+          console.log(params);
           const resp = await Handler[target](params, {
             return: "String"
           }).catch(err => {
